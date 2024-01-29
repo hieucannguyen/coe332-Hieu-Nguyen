@@ -12,7 +12,7 @@ Run Python scripts by typing `Python3  file_name_here`
 
 Example output:
 
-"""
+~~~
 Summary Statistics: 
 
 Number of meteorites: 30
@@ -28,4 +28,4 @@ Number Northern & Eastern: 21
 Number Northern & Western: 6
 
 Number Southern & Eastern: 0
-"""
+~~~
