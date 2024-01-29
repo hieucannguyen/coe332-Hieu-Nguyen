@@ -12,12 +12,20 @@ Run Python scripts by typing `Python3  file_name_here`
 
 Example output:
 
-`Summary Statistics: 
+"""
+Summary Statistics: 
 
 Number of meteorites: 30
+
 Number of classes: 19
+
 Most common class: L6
+
 Average mass: 83857.3
+
 Number Northern & Eastern: 21
+
 Number Northern & Western: 6
-Number Southern & Eastern: 0`
+
+Number Southern & Eastern: 0
+"""
