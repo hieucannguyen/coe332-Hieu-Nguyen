@@ -22,4 +22,5 @@ Average mass: 83857.3
 Number Northern & Eastern: 21
 Number Northern & Western: 6
 Number Southern & Eastern: 0
+Number Southern & Western: 3
 ~~~
