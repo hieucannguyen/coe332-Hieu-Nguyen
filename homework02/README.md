@@ -52,10 +52,14 @@ find the `closest_meteorite` function call. From there change the current meteor
 ## Testing Python scripts
 First install pytest using
 
-~~~pip3 install --user pytest~~~
+~~~
+pip3 install --user pytest
+~~~
 
 In the same directory as the scripts execute
 
-~~~pytest~~~
+~~~
+pytest
+~~~
 
 to see if the Python scripts passed the unit tests
