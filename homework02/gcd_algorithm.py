@@ -14,11 +14,6 @@ def great_circle_distance(point1: tuple, point2: tuple) -> float:
     """
     latitude1, longitude1 = point1
     latitude2, longitude2 = point2
-
-    if latitude1 > 90 or latitude2 > 90 or latitude1 < -90 or latitude2 < -90:
-        raise ValueError
-    if longitude1 > 180 or longitude2 > 180 or longitude1 < -180 or longitude2 < -180:
-        raise ValueError
     
     # Convert to radians
     latitude1 = latitude1 * pi / 180

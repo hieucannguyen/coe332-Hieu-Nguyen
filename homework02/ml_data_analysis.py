@@ -287,9 +287,6 @@ def main():
     except FileNotFoundError:
         logging.error('CSV file not found. Make sure the file exists and the path is correct.')
         raise
-    except Exception as e:
-        logging.error(f'Error reading CSV file: {e}')
-        raise
 
 if __name__ == '__main__':
     main()
