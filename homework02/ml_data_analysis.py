@@ -278,7 +278,7 @@ def main():
 
     try:
         # read from csv file
-        with open('Meteorite_Landings_20240204.csv', 'r', errors='ignore') as f:
+        with open('Meteorite_Landings.csv', 'r', errors='ignore') as f:
             reader = csv.DictReader(f)
             for row in reader:
                 data['meteorite_landings'].append(dict(row))
