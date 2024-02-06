@@ -16,7 +16,9 @@ Using Python we extracted the data, analyzed the data, and automated unit tests 
 ## Running the Analysis
 Once you have the dataset in the same directory as the Python scripts we can now run the command
 
-~~~Python3 ml_data_analysis.py~~~
+~~~
+Python3 ml_data_analysis.py
+~~~
 
 which should then output this
 
