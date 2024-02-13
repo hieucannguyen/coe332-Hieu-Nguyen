@@ -9,12 +9,21 @@ This project utilizes Docker to build and run our Python scripts to analyze NASA
 - [test_ml_data_analysis.py](test_ml_data_analysis.py): Unit tests for meteorite data analysis
 
 ## Software Diagram
-![image](![image](coe332_hw3_diagram.svg)
+![image](coe332_hw3_diagram.svg)
 
+`Software diagram of the development environment and Python scripts. Visualization of the application workflow and what the functions and outputs are in the Python scripts.`
 
 ## Data and Setup
 1. Navigate to [https://data.nasa.gov/Space-Science/Meteorite-Landings/gh4g-9sfh/about_data](https://data.nasa.gov/Space-Science/Meteorite-Landings/gh4g-9sfh/about_data) and go to export to then download the dataset in CSV format
 2. Move the dataset to the appropriate directory (same directory as the Python scripts)
+
+## Docker: build the image
+Navigate into the directory where our scripts and Dockerfile are located.
+
+Run 
+~~~
+$ docker build -t username/ml_data_analysis:1.0 .
+~~~
 
 ## Running the Analysis
 Once you have the dataset in the same directory as the Python scripts we can now run the command
