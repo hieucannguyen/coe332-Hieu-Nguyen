@@ -11,11 +11,13 @@ This project utilizes Docker to build and run our Python scripts to analyze NASA
 ## Software Diagram
 ![image](coe332_hw3_diagram.svg)
 
-`Software diagram of the development environment and Python scripts. Visualization of the application workflow and what the functions and outputs are in the Python scripts.`
+*Software diagram of the development environment and Python scripts. Visualization of the application workflow and what the functions and outputs are in the Python scripts.*
 
 ## Data and Setup
 1. Navigate to [https://data.nasa.gov/Space-Science/Meteorite-Landings/gh4g-9sfh/about_data](https://data.nasa.gov/Space-Science/Meteorite-Landings/gh4g-9sfh/about_data) and go to export to then download the dataset in CSV format
 2. Move the dataset to the appropriate directory (same directory as the Python scripts)
+
+**Note:** Using API endpoint to download the dataset only gets a sample of the full dataset. Use the download file option or the scripts will not work. 
 
 ## Docker: build the image
 Navigate into the directory where our scripts and Dockerfile are located.
@@ -25,15 +27,33 @@ Run
 $ docker build -t username/ml_data_analysis:1.0 .
 ~~~
 
-## Running the Analysis
-Once you have the dataset in the same directory as the Python scripts we can now run the command
+## Docker: Running the Analysis
+Once you have built the docker image using the Dockerfile we can now run the analysis.
 
+### Mount the data inside the container
+To mount our dataset into the container we use `-v $PWD/name_of_dataset.csv:/data/name_of_dataset.csv` in docker run.
+
+Example:
 ~~~
-Python3 ml_data_analysis.py
+$ docker run --rm -it -v $PWD/Meteorite_Landings.csv:/data/Meteorite_Landings.csv hieucannguyen/ml_data_analysis.py bin/bash
 ~~~
 
-which should then output this
+### Run the analysis
+There are two ways to run the analysis. First, you can use the interactive mode
+~~~
+$ docker run --rm -it -v $PWD/Meteorite_Landings.csv:/data/Meteorite_Landings.csv hieucannguyen/ml_data_analysis.py bin/bash
+~~~
+then run
+~~~
+$ Python3 ml_data_analysis.py -f /data/Meteorite_Landings.csv
+~~~
 
+Or the second way non-interactive way. Run
+~~~
+$ docker run --rm -it -v $PWD/Meteorite_Landings.csv:/data/Meteorite_Landings.csv hieucannguyen/ml_data_analysis:1.0 ml_data_analysis.py -f /data/Meteorite_Landings.csv
+~~~
+
+Both methods should print this
 ~~~
 Summary Statistics:
 
