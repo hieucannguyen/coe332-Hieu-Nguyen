@@ -41,16 +41,21 @@ $ docker run --rm -it -v $PWD/Meteorite_Landings.csv:/data/Meteorite_Landings.cs
 ### Run the analysis
 There are two ways to run the analysis. First, you can use the interactive mode
 ~~~
-$ docker run --rm -it -v $PWD/Meteorite_Landings.csv:/data/Meteorite_Landings.csv hieucannguyen/ml_data_analysis.py bin/bash
+$ docker run --rm -it \
+-v $PWD/Meteorite_Landings.csv:/data/Meteorite_Landings.csv \
+hieucannguyen/ml_data_analysis.py bin/bash
 ~~~
-then run
+then run this command in the root directory
 ~~~
-$ Python3 ml_data_analysis.py -f /data/Meteorite_Landings.csv
+root@6fd3cddccea2:/# Python3 ml_data_analysis.py -f /data/Meteorite_Landings.csv
 ~~~
 
 Or the second way non-interactive way. Run
 ~~~
-$ docker run --rm -it -v $PWD/Meteorite_Landings.csv:/data/Meteorite_Landings.csv hieucannguyen/ml_data_analysis:1.0 ml_data_analysis.py -f /data/Meteorite_Landings.csv
+$ docker run --rm -it \
+-v $PWD/Meteorite_Landings.csv:/data/Meteorite_Landings.csv \
+hieucannguyen/ml_data_analysis:1.0 \
+ml_data_analysis.py -f /data/Meteorite_Landings.csv
 ~~~
 
 Both methods should print this
