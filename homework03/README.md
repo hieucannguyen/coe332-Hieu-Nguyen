@@ -1,6 +1,7 @@
 # Meteorite Landings Analysis- Using Docker
 This project utilizes Docker to build and run our Python scripts to analyze NASA's meteorite data and derive insights such as time distribution, location mass distribution, and finding the closest meteorite to a specified one using the Great-circle distance formula. 
 
+Must have [Docker](https://docs.docker.com/get-docker/) installed on your system.
 ## File Descriptions
 - [Dockerfile](Dockerfile) Dockerfile to generate docker image of our application
 - [gcd_algorithm.py](gcd_algorithm.py) Computing the distance between 2 meteorites using the Great-circle distance formula
