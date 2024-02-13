@@ -39,7 +39,7 @@ $ docker run --rm -it -v $PWD/Meteorite_Landings.csv:/data/Meteorite_Landings.cs
 ~~~
 
 ### Run the analysis
-####There are two ways to run the analysis. First, you can use the interactive mode
+There are two ways to run the analysis. First, you can use the interactive mode
 ~~~
 $ docker run --rm -it \
 -v $PWD/Meteorite_Landings.csv:/data/Meteorite_Landings.csv \
@@ -50,7 +50,7 @@ then run this command in the root directory
 root@6fd3cddccea2:/# Python3 ml_data_analysis.py -f /data/Meteorite_Landings.csv
 ~~~
 
-####Or the second non-interactive way. Run
+Or the second non-interactive way. Run
 ~~~
 $ docker run --rm -it \
 -v $PWD/Meteorite_Landings.csv:/data/Meteorite_Landings.csv \
@@ -86,17 +86,18 @@ Closest meteorite to Aachen is Hautes Fagnes with a great circle distance of 22.
 To change meteorite used in the Great-circle distance algorithm edit the `summary_statistics` function in [ml_data_analysis.py](ml_data_analysis.py) and then
 find the `closest_meteorite` function call. From there change the current meteorite id to the meteorite id of interest
 
-## Testing Python scripts
-First install pytest using
-
+## Docker: run unit tests
+Using interactive mode
 ~~~
-pip3 install --user pytest
-~~~
-
-In the same directory as the scripts execute
-
-~~~
-pytest
+$ docker run --rm -it \
+-v $PWD/Meteorite_Landings.csv:/data/Meteorite_Landings.csv \
+hieucannguyen/ml_data_analysis.py bin/bash
 ~~~
 
-to see if the Python scripts passed the unit tests
+Navigate to code directory and run pytest
+~~~
+root@68238597887a:/# cd code/
+~~~
+~~~
+root@68238597887a:/code# pytest
+~~~
