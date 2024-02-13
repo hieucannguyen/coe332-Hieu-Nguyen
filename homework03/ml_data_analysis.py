@@ -183,15 +183,15 @@ def location_mass_distribution(data: List[dict]) -> dict:
     else:
         result['Northern & Eastern'] = round(result['Northern & Eastern'] / count_NE, 2)
     if count_NW == 0:
-        result['Northern & Western']
+        result['Northern & Western'] = 0
     else:
         result['Northern & Western'] = round(result['Northern & Western'] / count_NW, 2)
     if count_SE == 0:
-        result['Southern & Eastern']
+        result['Southern & Eastern'] = 0
     else:
         result['Southern & Eastern'] = round(result['Southern & Eastern'] / count_SE, 2)
     if count_SW == 0:
-        result['Southern & Western']
+        result['Southern & Western'] = 0
     else:
         result['Southern & Western'] = round(result['Southern & Western'] / count_SW, 2)
 
