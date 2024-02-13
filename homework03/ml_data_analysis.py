@@ -10,6 +10,8 @@ import socket
 parser = argparse.ArgumentParser()
 parser.add_argument('-l', '--loglevel', type=str, required=False, default='WARNING',
                     help='set log level to DEBUG, INFO, WARNING, ERROR, or CRITICAL')
+parser.add_argument('-f', '--filename', type=str, required=False, default='Meteorite_Landings.csv',
+                    help='set to file name of the meteorite landings data set')
 args = parser.parse_args()
 
 format_str=f'[%(asctime)s {socket.gethostname()}] %(filename)s:%(funcName)s:%(lineno)s - %(levelname)s: %(message)s'
@@ -279,7 +281,7 @@ def main():
 
     try:
         # read from csv file
-        with open('Meteorite_Landings_20240204.csv', 'r', errors='ignore') as f:
+        with open(args.filename, 'r', errors='ignore') as f:
             reader = csv.DictReader(f)
             for row in reader:
                 data['meteorite_landings'].append(dict(row))
