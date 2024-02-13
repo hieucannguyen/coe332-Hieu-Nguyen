@@ -2,11 +2,11 @@
 This project utilizes Docker to build and run our Python scripts to analyze NASA's meteorite data and derive insights such as time distribution, location mass distribution, and finding the closest meteorite to a specified one using the Great-circle distance formula. 
 
 ## File Descriptions
-- [Dockerfile](Dockerfile): Dockerfile to generate docker image of our application
-- [gcd_algorithm.py](gcd_algorithm.py): Computing the distance between 2 meteorites using the Great-circle distance formula
-- [ml_data_analysis.py](ml_data_analysis.py): Extracting and computing insights from the meteorite data
-- [test_gcd_algorithm.py](test_gcd_algorithm.py): Unit tests for my implementation of the Great-circle distance formula
-- [test_ml_data_analysis.py](test_ml_data_analysis.py): Unit tests for meteorite data analysis
+- [Dockerfile](Dockerfile) Dockerfile to generate docker image of our application
+- [gcd_algorithm.py](gcd_algorithm.py) Computing the distance between 2 meteorites using the Great-circle distance formula
+- [ml_data_analysis.py](ml_data_analysis.py) Extracting and computing insights from the meteorite data
+- [test_gcd_algorithm.py](test_gcd_algorithm.py) Unit tests for my implementation of the Great-circle distance formula
+- [test_ml_data_analysis.py](test_ml_data_analysis.py) Unit tests for meteorite data analysis
 
 ## Software Diagram
 ![image](coe332_hw3_diagram.svg)
