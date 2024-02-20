@@ -7,6 +7,7 @@ RUN apt-get update && \
 
 RUN pip3 install pytest==8.0.0
 RUN pip3 install requests==2.28.2
+RUN pip3 install xmltodict==0.13.0
 
 COPY iss_tracker.py /code/iss_tracker.py
 COPY test_iss_tracker.py /code/test_iss_tracker.py

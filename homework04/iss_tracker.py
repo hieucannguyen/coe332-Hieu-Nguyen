@@ -1,10 +1,12 @@
+#!/usr/bin/env python3
+
 import requests
 import xmltodict
 import datetime
 import math
 from typing import List
 
-def time_range(start: str, end: str) -> tuple[str, str, int]:
+def time_range(start: str, end: str):
     """
         Given two date times from iss data, format it and compute range between dates
 
