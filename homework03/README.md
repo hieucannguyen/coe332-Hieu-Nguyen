@@ -36,7 +36,7 @@ To mount our dataset into the container we use `-v $PWD/name_of_dataset.csv:/dat
 
 Example:
 ~~~
-$ docker run --rm -it -v $PWD/Meteorite_Landings.csv:/data/Meteorite_Landings.csv hieucannguyen/ml_data_analysis.py bin/bash
+$ docker run --rm -it -v $PWD/Meteorite_Landings.csv:/data/Meteorite_Landings.csv hieucannguyen/ml_data_analysis:1.0 bin/bash
 ~~~
 
 ### Run the analysis
@@ -53,7 +53,7 @@ root@6fd3cddccea2:/# Python3 ml_data_analysis.py -f /data/Meteorite_Landings.csv
 
 Or the second non-interactive way. Run
 ~~~
-$ docker run --rm -it \
+$ docker run --rm \
 -v $PWD/Meteorite_Landings.csv:/data/Meteorite_Landings.csv \
 hieucannguyen/ml_data_analysis:1.0 \
 ml_data_analysis.py -f /data/Meteorite_Landings.csv
