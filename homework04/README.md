@@ -4,7 +4,7 @@ The ISS Tracker project aims to streamline the process of accessing and analyzin
 Must have [Docker](https://docs.docker.com/get-docker/) installed on your system.
 
 ## ISS Data Overview
-The ISS Trajectory Data website provides access to data available in both plain text and XML formats. These datasets contain ISS state vectors spanning a 15-day period. State vectors include Cartesian vectors for position {X, Y, Z} and velocity {X_DOT, Y_DOT, Z_DOT}, along with timestamps (EPOCH), describing the complete state of the ISS relative to Earth, based on the J2000 reference frame.
+The [ISS Trajectory Data website](https://spotthestation.nasa.gov/trajectory_data.cfm) provides access to data available in both plain text and XML formats. These datasets contain ISS state vectors spanning a 15-day period. State vectors include Cartesian vectors for position {X, Y, Z} and velocity {X_DOT, Y_DOT, Z_DOT}, along with timestamps (EPOCH), describing the complete state of the ISS relative to Earth, based on the J2000 reference frame.
 
 ## File Descriptions
 - [Dockerfile](Dockerfile) Dockerfile to generate docker image of our application
