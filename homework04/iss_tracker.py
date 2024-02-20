@@ -18,6 +18,7 @@ def time_range(start: str, end: str) -> tuple[str, str, int]:
             range (int): amount of days from start to end
     """
 
+    # use slicing to extract date time numbers to datetime format
     range = int(end[5:8]) - int(start[5:8])
     start = datetime.datetime(int(start[0:4]), 1, 1) + datetime.timedelta(int(start[5:8]) - 1)
     end = datetime.datetime(int(end[0:4]), 1, 1) + datetime.timedelta(int(end[5:8]) - 1)
