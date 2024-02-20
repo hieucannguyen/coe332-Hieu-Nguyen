@@ -6,6 +6,21 @@ import datetime
 import math
 from typing import List
 
+# add logging
+import argparse
+import logging
+import socket
+
+parser = argparse.ArgumentParser()
+parser.add_argument('-l', '--loglevel', type=str, required=False, default='WARNING',
+                    help='set log level to DEBUG, INFO, WARNING, ERROR, or CRITICAL')
+parser.add_argument('-f', '--filename', type=str, required=False, default='Meteorite_Landings.csv',
+                    help='set to file name of the meteorite landings data set')
+args = parser.parse_args()
+
+format_str=f'[%(asctime)s {socket.gethostname()}] %(filename)s:%(funcName)s:%(lineno)s - %(levelname)s: %(message)s'
+logging.basicConfig(level=args.loglevel, format=format_str)
+
 def time_range(start: str, end: str):
     """
         Given two date times from iss data, format it and compute range between dates
@@ -57,9 +72,13 @@ def find_closest_epoch(data: List[dict]) -> dict:
                                         seconds=float(epoch['EPOCH'][15:21]))
         
         new_time_difference = abs((now - new_date).total_seconds())
+        if new_time_difference < 0:
+            logging.warning('negative time, NOT wanted')
+
         if new_time_difference < closest_time_difference:
             closest_date = new_date
             closest_time_difference = new_time_difference
+            logging.debug(f'Closest date: {closest_date}, time-diff: {closest_time_difference}s')
             closest_epoch = epoch
 
     return closest_epoch
@@ -86,6 +105,7 @@ def average_speed(data: List[dict]) -> float:
 
 def current_speed(data):
     closest_epoch = find_closest_epoch(data)
+    logging.debug(f'Closest epoch: {closest_epoch}')
     return math.sqrt((float(closest_epoch['X_DOT']['#text']))**2 + \
                      (float(closest_epoch['Y_DOT']['#text']))**2 + \
                      (float(closest_epoch['Z_DOT']['#text']))**2)
