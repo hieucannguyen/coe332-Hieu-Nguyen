@@ -99,7 +99,7 @@ Example output using `curl localhost:5000/epochs/2024-052T12:00:00.000Z/speed`:
   "Speed (km/s)": 7.655330269344684
 }
 ~~~
-### `$/now`
+### `/now`
 - METHOD: GET
 - Returns state vectors and instantaneous speed for the epoch that is nearest in time.
 
