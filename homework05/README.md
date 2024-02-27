@@ -19,7 +19,7 @@ The [ISS Trajectory Data website](https://spotthestation.nasa.gov/trajectory_dat
 
 *Software diagram of the Flask Application. Visualization of the application workflow using Docker and how to API endpoints interact between the code and web server.*
 
-## Docker: build the image
+## Docker: Build the image
 Navigate into the directory where our app, Dockerfile, and docker-compose.yml are located.
 
 Run 
