@@ -46,7 +46,7 @@ $ docker-compose down
 - METHOD: GET
 - Returns the entire data set of epochs.
 
-Example output:
+Example output `$ curl localhost:5000/epochs`:
 ~~~
 [
   {
@@ -64,7 +64,7 @@ Example output:
 - METHOD: GET
 - Returns a modified list of epochs based on query parameters.
 
-Example output using `curl localhost:5000/epochs?limit=2&offset=1`:
+Example output using `$ curl localhost:5000/epochs?limit=2&offset=1`:
 ~~~
 [
   {
@@ -81,7 +81,7 @@ Example output using `curl localhost:5000/epochs?limit=2&offset=1`:
 - METHOD: GET
 - Returns state vectors for a specific epoch from the data set.
 
-Example output using `curl localhost:5000/epochs/2024-052T12:00:00.000Z`:
+Example output using `$ curl localhost:5000/epochs/2024-052T12:00:00.000Z`:
 ~~~
 {
   "EPOCH": "2024-052T12:00:00.000Z",
@@ -92,7 +92,7 @@ Example output using `curl localhost:5000/epochs/2024-052T12:00:00.000Z`:
 - METHOD: GET
 - Returns instantaneous speed for a specific epoch in the data set.
 
-Example output using `curl localhost:5000/epochs/2024-052T12:00:00.000Z/speed`:
+Example output using `$ curl localhost:5000/epochs/2024-052T12:00:00.000Z/speed`:
 ~~~
 {
   "EPOCH": "2024-052T12:00:00.000Z",
@@ -103,7 +103,7 @@ Example output using `curl localhost:5000/epochs/2024-052T12:00:00.000Z/speed`:
 - METHOD: GET
 - Returns state vectors and instantaneous speed for the epoch that is nearest in time.
 
-Example output:
+Example output `$ curl localhost:5000/now`:
 ~~~
 {
   "EPOCH": "2024-057T19:38:32.672Z",
