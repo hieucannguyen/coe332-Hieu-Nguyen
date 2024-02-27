@@ -39,6 +39,7 @@ Since we mapped to port 5000 in the [docker-compose.yml](docker-compose.yml) to 
 ### `$ localhost:5000/epochs`
 - METHOD: GET
 - Returns the entire data set of epochs.
+
 Example output:
 ~~~
 [
@@ -56,6 +57,7 @@ Example output:
 ### `$ localhost:5000/epochs?limit=int&offset=int`
 - METHOD: GET
 - Returns a modified list of epochs based on query parameters.
+
 Example output using `curl localhost:5000/epochs?limit=2&offset=1`:
 ~~~
 [
@@ -73,6 +75,7 @@ Example output using `curl localhost:5000/epochs?limit=2&offset=1`:
 ### `$ localhost:5000/epochs/<epoch>`
 - METHOD: GET
 - Returns state vectors for a specific epoch from the data set.
+
 Example output using `curl localhost:5000/epochs/2024-052T12:00:00.000Z`:
 ~~~
 {
@@ -83,6 +86,7 @@ Example output using `curl localhost:5000/epochs/2024-052T12:00:00.000Z`:
 ### `$ localhost:5000/epochs/<epoch>/speed`
 - METHOD: GET
 - Returns instantaneous speed for a specific epoch in the data set.
+
 Example output using `curl localhost:5000/epochs/2024-052T12:00:00.000Z/speed`:
 ~~~
 {
@@ -93,6 +97,7 @@ Example output using `curl localhost:5000/epochs/2024-052T12:00:00.000Z/speed`:
 ### `$ localhost:5000/now`
 - METHOD: GET
 - Returns state vectors and instantaneous speed for the epoch that is nearest in time.
+
 Example output:
 ~~~
 {
