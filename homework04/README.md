@@ -15,9 +15,9 @@ The [ISS Trajectory Data website](https://spotthestation.nasa.gov/trajectory_dat
 Navigate into the directory where our scripts and Dockerfile are located.
 
 Run 
-~~~
+```
 $ docker build -t username/iss_tracker:1.0 .
-~~~
+```
 
 ## Docker: Run the analysis
 There are two ways to run the analysis. First, you can use the interactive mode
