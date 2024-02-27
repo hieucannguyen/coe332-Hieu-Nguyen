@@ -19,7 +19,7 @@ The [ISS Trajectory Data website](https://spotthestation.nasa.gov/trajectory_dat
 
 *Software diagram of the Flask Application. Visualization of the application workflow using Docker and how to API endpoints interact between the code and web server.*
 
-## Docker: build the image
+## Docker: Build the image
 Navigate into the directory where our app, Dockerfile, and docker-compose.yml are located.
 
 Run 
@@ -33,17 +33,84 @@ Using the [docker-compose.yml](docker-compose.yml) file we can run it to start t
 $ docker-compose up -d
 ~~~
 **Note:** -d starts the application in the background
-Since we mapped to port 5000 in the [docker-compose.yml](docker-compose.yml) to interact with the Flask microservices we can use `curl`
-## API Endpoints
-| Example usage                        | Method | Output                                                             |
-|------------------------------|--------|-------------------------------------------------------------------------|
-| localhost:5000/epochs                      | GET    | Returns the entire data set of epochs.                                  |
-| localhost:5000/epochs?limit=2&offset=3 | GET    | Returns a modified list of epochs based on query parameters for pagination. |
-| localhost:5000/epochs/<epoch>              | GET    | Returns state vectors for a specific epoch from the data set.           |
-| localhost:5000/epochs/<epoch>/speed        | GET    | Returns instantaneous speed for a specific epoch in the data set. (Math required!) |
-| localhost:5000/now                         | GET    | Returns state vectors and instantaneous speed for the epoch that is nearest in time. |
-### `localhost:5000/epochs`
 
+Since we mapped to port 5000 in the [docker-compose.yml](docker-compose.yml) to interact with the Flask microservices we can use `curl`
+
+To stop the container use
+~~~
+$ docker-compose down
+~~~
+## API Endpoints
+
+### `/epochs`
+- METHOD: GET
+- Returns the entire data set of epochs.
+
+Example output `$ curl localhost:5000/epochs`:
+~~~
+[
+  {
+    "EPOCH": "2024-052T12:00:00.000Z",
+    ...
+  },
+  {
+    "EPOCH": "2024-052T12:04:00.000Z",
+    ...
+  },
+  ...
+]
+~~~
+### `/epochs?limit=int&offset=int`
+- METHOD: GET
+- Returns a modified list of epochs based on query parameters.
+
+Example output using `$ curl localhost:5000/epochs?limit=2&offset=1`:
+~~~
+[
+  {
+    "EPOCH": "2024-052T12:04:00.000Z",
+    ...
+  },
+  {
+    "EPOCH": "2024-052T12:08:00.000Z",
+    ...
+  },
+]
+~~~
+### `/epochs/<epoch>`
+- METHOD: GET
+- Returns state vectors for a specific epoch from the data set.
+
+Example output using `$ curl localhost:5000/epochs/2024-052T12:00:00.000Z`:
+~~~
+{
+  "EPOCH": "2024-052T12:00:00.000Z",
+  ...
+}
+~~~
+### `/epochs/<epoch>/speed`
+- METHOD: GET
+- Returns instantaneous speed for a specific epoch in the data set.
+
+Example output using `$ curl localhost:5000/epochs/2024-052T12:00:00.000Z/speed`:
+~~~
+{
+  "EPOCH": "2024-052T12:00:00.000Z",
+  "Speed (km/s)": 7.655330269344684
+}
+~~~
+### `/now`
+- METHOD: GET
+- Returns state vectors and instantaneous speed for the epoch that is nearest in time.
+
+Example output `$ curl localhost:5000/now`:
+~~~
+{
+  "EPOCH": "2024-057T19:38:32.672Z",
+  "Speed (km/s)": 7.66218133024622,
+  ...
+}
+~~~
 ## Run unit tests
 In the working directory run
 ~~~
