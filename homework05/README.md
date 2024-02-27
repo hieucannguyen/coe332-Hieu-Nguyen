@@ -30,8 +30,10 @@ $ docker build -t username/iss_tracker_app:1.0 .
 ## Docker: Run Flask Application Container
 Using the [docker-compose.yml](docker-compose.yml) file we can run it to start the Flask application container
 ~~~
-$ docker-compose up
+$ docker-compose up -d
 ~~~
+**Note:** -d starts the application in the background
+
 Since we mapped to port 5000 in the [docker-compose.yml](docker-compose.yml) to interact with the Flask microservices we can use `curl`
 ### API Endpoints
 | Example usage                        | Method | Output                                                             |
@@ -40,7 +42,34 @@ Since we mapped to port 5000 in the [docker-compose.yml](docker-compose.yml) to 
 | localhost:5000/epochs?limit=2&offset=3 | GET    | Returns a modified list of epochs based on query parameters for pagination. |
 | localhost:5000/epochs/<epoch>              | GET    | Returns state vectors for a specific epoch from the data set.           |
 | localhost:5000/epochs/<epoch>/speed        | GET    | Returns instantaneous speed for a specific epoch in the data set. (Math required!) |
-| localhost:5000/now                         | GET    | Returns state vectors and instantaneous speed for the epoch that is nearest in time. |
+| localhost:5000/now                         | GET    | {
+  "EPOCH": "2024-058T01:26:32.672Z",
+  "Speed (km/s)": 7.657973107188885,
+  "X": {
+    "#text": "-1853.7367198354",
+    "@units": "km"
+  },
+  "X_DOT": {
+    "#text": "-6.5416079487151402",
+    "@units": "km/s"
+  },
+  "Y": {
+    "#text": "5134.78947360452",
+    "@units": "km"
+  },
+  "Y_DOT": {
+    "#text": "0.72374511091354998",
+    "@units": "km/s"
+  },
+  "Z": {
+    "#text": "-4048.5531539581202",
+    "@units": "km"
+  },
+  "Z_DOT": {
+    "#text": "3.91511309800417",
+    "@units": "km/s"
+  }
+} |
 
 
 ## Run unit tests
