@@ -33,6 +33,7 @@ Using the [docker-compose.yml](docker-compose.yml) file we can run it to start t
 $ docker-compose up -d
 ~~~
 **Note:** -d starts the application in the background
+
 Since we mapped to port 5000 in the [docker-compose.yml](docker-compose.yml) to interact with the Flask microservices we can use `curl`
 
 To stop the container use
@@ -41,7 +42,7 @@ $ docker-compose down
 ~~~
 ## API Endpoints
 
-### `$ localhost:5000/epochs`
+### `/epochs`
 - METHOD: GET
 - Returns the entire data set of epochs.
 
@@ -59,7 +60,7 @@ Example output:
   ...
 ]
 ~~~
-### `$ localhost:5000/epochs?limit=int&offset=int`
+### `/epochs?limit=int&offset=int`
 - METHOD: GET
 - Returns a modified list of epochs based on query parameters.
 
@@ -76,7 +77,7 @@ Example output using `curl localhost:5000/epochs?limit=2&offset=1`:
   },
 ]
 ~~~
-### `$ localhost:5000/epochs/<epoch>`
+### `/epochs/<epoch>`
 - METHOD: GET
 - Returns state vectors for a specific epoch from the data set.
 
@@ -87,7 +88,7 @@ Example output using `curl localhost:5000/epochs/2024-052T12:00:00.000Z`:
   ...
 }
 ~~~
-### `$ localhost:5000/epochs/<epoch>/speed`
+### `/epochs/<epoch>/speed`
 - METHOD: GET
 - Returns instantaneous speed for a specific epoch in the data set.
 
@@ -98,7 +99,7 @@ Example output using `curl localhost:5000/epochs/2024-052T12:00:00.000Z/speed`:
   "Speed (km/s)": 7.655330269344684
 }
 ~~~
-### `$ localhost:5000/now`
+### `$/now`
 - METHOD: GET
 - Returns state vectors and instantaneous speed for the epoch that is nearest in time.
 
