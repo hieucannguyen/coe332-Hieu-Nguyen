@@ -34,6 +34,11 @@ $ docker-compose up -d
 ~~~
 **Note:** -d starts the application in the background
 Since we mapped to port 5000 in the [docker-compose.yml](docker-compose.yml) to interact with the Flask microservices we can use `curl`
+
+To stop the container use
+~~~
+$ docker-compose down
+~~~
 ## API Endpoints
 
 ### `$ localhost:5000/epochs`
