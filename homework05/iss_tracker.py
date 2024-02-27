@@ -19,7 +19,13 @@ args = parser.parse_args()
 format_str=f'[%(asctime)s {socket.gethostname()}] %(filename)s:%(funcName)s:%(lineno)s - %(levelname)s: %(message)s'
 logging.basicConfig(level=args.loglevel, format=format_str)
 
-def get_data():
+def get_data() -> List[dict]:
+    """
+        Returns ISS Trajectory dataset
+
+        Returns:
+            ISS Trajectory dataset
+    """
     response = requests.get(url='https://nasa-public-data.s3.amazonaws.com/iss-coords/current/ISS_OEM/ISS.OEM_J2K_EPH.xml')
     iss_data = xmltodict.parse(response.content)
     return iss_data['ndm']['oem']['body']['segment']['data']['stateVector']
@@ -113,7 +119,18 @@ def current_speed(data):
                      (float(closest_epoch['Y_DOT']['#text']))**2 + \
                      (float(closest_epoch['Z_DOT']['#text']))**2)
 
-def compute_speed(x, y, z):
+def compute_speed(x: float, y: float, z: float) -> float:
+    """
+        Computes instantaneous speed
+
+        Args:
+            x (float): x component of velocity vector
+            y (float): y component of velocity vector
+            z (float): z component of velocity vector
+
+        Returns:
+            instantaneous speed
+    """
     return math.sqrt(x**2 + y**2 + z**2)
 
 def main():

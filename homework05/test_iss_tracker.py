@@ -3,7 +3,8 @@ import math
 from iss_tracker import (
         time_range,
         find_closest_epoch,
-        average_speed
+        average_speed,
+        compute_speed
 )
 
 def test_time_range():
@@ -57,3 +58,13 @@ def test_average_speed():
 
         # Check if the average speed is calculated correctly
         assert avg_speed == expected_average_speed
+
+def test_compute_speed():
+
+        expected_speed = math.sqrt(1**2 + 2**2 + 3**2)
+        
+        # Calculate the speed using the function
+        speed = compute_speed(1, 2, 3)
+
+        # Check if the speed is calculated correctly
+        assert expected_speed == speed

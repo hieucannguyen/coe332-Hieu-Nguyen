@@ -6,6 +6,13 @@ app = Flask(__name__)
 
 @app.route("/epochs", methods=["GET"])
 def get_epochs():
+    """
+        Route to return entire ISS dataset
+
+        Query parameters:
+            limit (int): limit amount of epochs
+            offset (int): offset the epochs
+    """
     data = get_data()
     limit = int(request.args.get("limit", 0))
     offset = int(request.args.get("offset", 0))
@@ -20,6 +27,12 @@ def get_epochs():
 
 @app.route("/epochs/<epoch>", methods=["GET"])
 def get_specific_epoch(epoch):
+    """
+        Route to return a specific epoch in the ISS dataset
+
+        Args:
+            epoch (string): specific timestamp of the epoch
+    """
     data = get_data()
     for item in data:
         if item["EPOCH"] == epoch:
@@ -30,6 +43,12 @@ def get_specific_epoch(epoch):
 
 @app.route("/epochs/<epoch>/speed", methods=["GET"])
 def get_specific_epoch_speed(epoch):
+    """
+        Route to return a specific epoch's speed in the ISS dataset
+
+        Args:
+            epoch (string): specific timestamp of the epoch
+    """
     data = get_data()
     for item in data:
         if item["EPOCH"] == epoch:
@@ -47,6 +66,10 @@ def get_specific_epoch_speed(epoch):
 
 @app.route("/now", methods=["GET"])
 def get_current_epoch():
+    """
+        Route to return the closest epoch to the current time along with its speed in the ISS dataset
+
+    """
     data = get_data()
     current_epoch = find_closest_epoch(data)
     current_epoch["Speed (km/s)"] = compute_speed(
