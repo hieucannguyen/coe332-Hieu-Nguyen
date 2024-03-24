@@ -29,6 +29,18 @@ def handle_data():
         rd.flushdb()
         return jsonify({'message': 'Data deleted successfully'})
 
+@app.route('/genes', methods=['GET'])
+def get_genes():
+    return requests.get('https://localhost:5000/data').content
+
+@app.route('/genes/<hgnc_id>', methods=['GET'])
+def get_specific_gene(hgnc_id):
+    rd = get_redis_client
+    for id in rd.keys():
+        if id == hgnc_id:
+            return json.loads(rd.get(id))
+        
+    return jsonify({'message': 'hgnc_id not found'})
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0")
