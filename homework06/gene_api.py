@@ -1,0 +1,34 @@
+from flask import Flask, request, jsonify
+import requests
+import redis
+import json
+
+app = Flask(__name__)
+
+def get_data():
+    response = requests.get(url='https://g-a8b222.dd271.03c0.data.globus.org/pub/databases/genenames/hgnc/json/hgnc_complete_set.json')
+    return json.loads(response.content)['response']
+
+def get_redis_client():
+    return redis.Redis(host='127.0.0.1', port=6379, db=0)
+
+@app.route('/data', methods=['POST', 'GET', 'DELETE'])
+def handle_data():
+    if request.method == 'POST':
+        data = get_data()['docs']
+        rd = get_redis_client()
+        for gene in data:
+            rd.set(gene['hgnc_id'], json.dumps(gene))
+        return jsonify({'message': 'Data added successfully'})
+    if request.method == ['GET']:
+        result = []
+        for key in rd.keys():
+            result.append(json.loads(rd.get(key)))
+        return jsonify(result)
+    if request.method == ['DELETE']:
+        rd.flushdb()
+        return jsonify({'message': 'Data deleted successfully'})
+
+
+if __name__ == "__main__":
+    app.run(debug=True, host="0.0.0.0")
