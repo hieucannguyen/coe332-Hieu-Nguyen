@@ -10,22 +10,22 @@ def get_data():
     return json.loads(response.content)['response']
 
 def get_redis_client():
-    return redis.Redis(host='127.0.0.1', port=6379, db=0)
+    return redis.Redis(host='redis-db', port=6379, db=0)
 
 @app.route('/data', methods=['POST', 'GET', 'DELETE'])
 def handle_data():
+    rd = get_redis_client()
     if request.method == 'POST':
         data = get_data()['docs']
-        rd = get_redis_client()
         for gene in data:
             rd.set(gene['hgnc_id'], json.dumps(gene))
         return jsonify({'message': 'Data added successfully'})
-    if request.method == ['GET']:
+    if request.method == 'GET':
         result = []
         for key in rd.keys():
             result.append(json.loads(rd.get(key)))
         return jsonify(result)
-    if request.method == ['DELETE']:
+    if request.method == 'DELETE':
         rd.flushdb()
         return jsonify({'message': 'Data deleted successfully'})
 
