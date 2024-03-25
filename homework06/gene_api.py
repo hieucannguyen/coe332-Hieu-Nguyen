@@ -49,7 +49,7 @@ def handle_data():
 @app.route('/genes', methods=['GET'])
 def get_genes():
     """
-        Return a list of unique HGNC_IDS
+        Return a list of unique HGNC_IDs
     """
     rd = get_redis_client()
     return jsonify(rd.keys())
