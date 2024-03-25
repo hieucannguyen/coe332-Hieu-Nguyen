@@ -31,14 +31,17 @@ def handle_data():
 
 @app.route('/genes', methods=['GET'])
 def get_genes():
-    return requests.get('https://localhost:5000/data').content
+    rd = get_redis_client()
+    result = []
+    for key in rd.keys():
+        result.append(json.loads(rd.get(key)))
+    return jsonify(result)
 
 @app.route('/genes/<hgnc_id>', methods=['GET'])
 def get_specific_gene(hgnc_id):
-    rd = get_redis_client
-    for id in rd.keys():
-        if id == hgnc_id:
-            return json.loads(rd.get(id))
+    rd = get_redis_client()
+    if rd.exists(hgnc_id):
+        return json.loads(rd.get(hgnc_id))
         
     return jsonify({'message': 'hgnc_id not found'})
 
