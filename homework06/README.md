@@ -31,7 +31,7 @@ $ docker-compose build
 ~~~
 
 ### Run Flask Application Container
-Using the docker-compose.yml file we can use it to start the Flask application container
+Using the [docker-compose.yml](docker-compose.yml) file we can use it to start the Flask application container
 ~~~
 $ docker-compose up -d
 ~~~
