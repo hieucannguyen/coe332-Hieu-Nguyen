@@ -10,7 +10,7 @@ def get_data():
     return json.loads(response.content)['response']
 
 def get_redis_client():
-    return redis.Redis(host='redis-db', port=6379, db=0)
+    return redis.Redis(host='redis-db', port=6379, db=0, decode_responses=True)
 
 @app.route('/data', methods=['POST', 'GET', 'DELETE'])
 def handle_data():
@@ -32,10 +32,7 @@ def handle_data():
 @app.route('/genes', methods=['GET'])
 def get_genes():
     rd = get_redis_client()
-    result = []
-    for key in rd.keys():
-        result.append(json.loads(rd.get(key)))
-    return jsonify(result)
+    return jsonify(rd.keys())
 
 @app.route('/genes/<hgnc_id>', methods=['GET'])
 def get_specific_gene(hgnc_id):
