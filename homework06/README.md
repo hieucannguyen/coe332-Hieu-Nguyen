@@ -89,7 +89,7 @@ Example output using `$ curl localhost:5000/data -X DELETE`:
 Where data was deleted successfully
 ### `/genes`
 - METHOD: GET
-- Return a list of unique HGNC_IDS.
+- Return a list of unique HGNC_IDs.
 
 Example output using `$ curl localhost:5000/genes`:
 ~~~
