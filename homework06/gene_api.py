@@ -30,10 +30,13 @@ def handle_data():
     """
     rd = get_redis_client()
     if request.method == 'POST':
-        data = get_data()['docs']
-        for gene in data:
-            rd.set(gene['hgnc_id'], json.dumps(gene))
-        return jsonify({'message': 'Data added successfully'})
+        try:
+            data = get_data()['docs']
+            for gene in data:
+                rd.set(gene['hgnc_id'], json.dumps(gene))
+            return jsonify({'message': 'Data added successfully'})
+        except:
+            return jsonify({'message': 'Data was NOT added successfully'})
     if request.method == 'GET':
         result = []
         for key in rd.keys():
