@@ -16,6 +16,8 @@ services:
             dockerfile: Dockerfile
         depends_on:
             - redis-db
+        environment:
+        - REDIS_HOST=redis-db
         image: hieucannguyen/hgnc_app:1.0
         ports:
             - 5000:5000
@@ -27,5 +29,7 @@ services:
         dockerfile: Dockerfile
       depends_on:
         - redis-db
+      environment:
+        - REDIS_HOST=redis-db
       command: ["python3", "worker.py"]
                   

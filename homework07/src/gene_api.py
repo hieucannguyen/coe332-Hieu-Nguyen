@@ -13,14 +13,14 @@ def get_data():
     response = requests.get(url='https://g-a8b222.dd271.03c0.data.globus.org/pub/databases/genenames/hgnc/json/hgnc_complete_set.json')
     return json.loads(response.content)['response']
 
-def get_redis_client():
-    """
-        Create redis client
-    """
-    return redis.Redis(host='redis-db', port=6379, db=0, decode_responses=True)
-
 @app.route('/jobs', methods = ['POST'])
 def submit_jobs():
+    """
+        Route to send a job to redis database
+
+        Methods:
+            POST: Send a job to redis database
+    """
     data = request.get_json()
     try:
         job_dict = add_job(data['symbol'], data['gene_family'])
@@ -30,9 +30,15 @@ def submit_jobs():
 
 @app.route('/jobs', methods=['GET'])
 def get_jobs():
+    """
+        Gets all jobs in the redis database
+    """
     return jsonify(jdb.keys())
 @app.route('/jobs/<jobid>', methods=['GET'])
 def get_job(jobid):
+    """
+        Gets a specific job by unique uuid
+    """
     return get_job_by_id(jobid)
 
 @app.route('/data', methods=['POST', 'GET', 'DELETE'])
@@ -45,7 +51,6 @@ def handle_data():
             GET: Return entire gene dataset from redis database in JSON
             DELETE: Delete everything redis
     """
-    rd = get_redis_client()
     if request.method == 'POST':
         try:
             data = get_data()['docs']
@@ -68,7 +73,6 @@ def get_genes():
     """
         Return a list of unique HGNC_IDs
     """
-    rd = get_redis_client()
     return jsonify(rd.keys())
 
 @app.route('/genes/<hgnc_id>', methods=['GET'])
@@ -76,7 +80,6 @@ def get_specific_gene(hgnc_id):
     """
         Return gene information of a specific HGNC_ID
     """
-    rd = get_redis_client()
     if rd.exists(hgnc_id):
         return json.loads(rd.get(hgnc_id))
         

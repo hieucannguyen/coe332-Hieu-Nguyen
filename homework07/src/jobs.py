@@ -2,13 +2,14 @@ import json
 import uuid
 import redis
 from hotqueue import HotQueue
+import os
 
-_redis_ip='redis-db'
+redis_host = os.environ.get('REDIS_HOST')
 _redis_port='6379'
 
-rd = redis.Redis(host=_redis_ip, port=6379, db=0)
-q = HotQueue("queue", host=_redis_ip, port=6379, db=1)
-jdb = redis.Redis(host=_redis_ip, port=6379, db=2, decode_responses=True)
+rd = redis.Redis(host=redis_host, port=_redis_port, db=0)
+q = HotQueue("queue", host=redis_host, port=_redis_port, db=1)
+jdb = redis.Redis(host=redis_host, port=_redis_port, db=2, decode_responses=True)
 
 def _generate_jid():
     """
@@ -19,7 +20,7 @@ def _generate_jid():
 def _instantiate_job(jid, status, symbol, gene_family):
     """
     Create the job object description as a python dictionary. Requires the job id,
-    status, start and end parameters.
+    status, sybmol and gene_family parameters.
     """
     return {'id': jid,
             'status': status,
