@@ -1,5 +1,5 @@
-# Gene API
-This project utilizes the gene symbol reports managed by the HUGO Gene Nomenclature Committee (HGNC) to create API endpoints using flask. The API endpoints serve to perfrom Create, Read, and Delete operations on the HGNC gene dataset to a redis database. The endpoints also support GET routes for users to interact with the gene data from the redis database.
+# Gene API Job Requests
+This project utilizes the gene symbol reports managed by the HUGO Gene Nomenclature Committee (HGNC) to create API endpoints using flask. The API endpoints serve to perfrom Create, Read, and Delete operations on the HGNC gene dataset to a redis database. The endpoints also support GET routes for users to interact with the gene data from the redis database. Additionally, this project adds a jobs database feature so that user can send in jobs requests.
 
 Must have [Docker](https://docs.docker.com/get-docker/) installed on your system.
 
@@ -8,18 +8,25 @@ The [Human Genome Organization (HUGO) Gene Nomenclature Committee](https://www.g
 
 ## File Descriptions
 ~~~
-Homework06/
+Homework07/
     ├── Dockerfile
     ├── docker-compose.yml
     ├── requirements.txt
-    ├── gene_api.py
-    └── README.md
+    ├── README.md
+    ├── data
+│   │   └── .gitcanary
+    └── src
+      ├── gene_api.py
+      ├── jobs.py
+      └── worker.py
 ~~~
 
 - [Dockerfile](Dockerfile) Dockerfile to generate a docker image of our application
 - [docker-compose.yml](docker-compose.yml) docker-compose file to run the containerized Flask application
 - [requirements.txt](requirements.txt) Required dependencies for the project
-- [gene_api.py](gene_api.py) API endpoints for communicaton to redis and get requests 
+- [gene_api.py](gene_api.py) API endpoints for communicaton to redis and get requests
+- [jobs.py](jobs.py) Module to handle jobs requests 
+- [worker.py](worker.py) worker to handle jobs in the redis database (queue) as they come in
 
 ## Running the application using Docker
 ### Build the image
@@ -46,6 +53,51 @@ $ docker-compose down
 
 ## API Endpoints
 
+### `/jobs`
+- METHOD: POST
+- Put the job request into the redis database.
+
+Example output using `$ curl localhost:5000/jobs -X POST -d '{"symbol": "AA","gene_family":123}' -H "Content-Type: application/json"`:
+~~~
+{
+  "gene_family": 123,
+  "id": "eaaba65c-56b5-40c6-81d0-5ed6197e21ec",
+  "status": "submitted",
+  "symbol": "AA"
+}
+~~~
+Means the job has been added to the redis database successfully.
+### `/jobs`
+- METHOD: GET
+- Gets all the current/past jobs in the redis database
+
+Example output using `$ curl localhost:5000/jobs`:
+~~~
+[
+  "b6520382-e89b-4ad6-9340-143d61a6268f",
+  "523451d4-b46a-44d9-ad24-27900a3e0412",
+  "d5ae5cc8-67e1-41e6-abfc-a19cc2d1bf4d",
+  "48b10aa6-0133-47e3-b650-4f9fe1191931",
+  "15fa79db-a093-4ba4-8ace-d7968f77d9ea",
+  "c62cd254-c67d-467f-b317-357477611dc0",
+  "eaaba65c-56b5-40c6-81d0-5ed6197e21ec"
+]
+~~~
+Means the data has been added to the redis database successfully.
+### `/jobs/<jobid?`
+- METHOD: GET
+- Gets the specific job specified by jobid
+
+Example output using `$ curl localhost:5000/jobs/eaaba65c-56b5-40c6-81d0-5ed6197e21ec`:
+~~~
+{
+  "gene_family": 123,
+  "id": "eaaba65c-56b5-40c6-81d0-5ed6197e21ec",
+  "status": "complete",
+  "symbol": "AA"
+}
+~~~
+Means the data has been added to the redis database successfully.
 ### `/data`
 - METHOD: POST
 - Put the gene dataset into the redis database.
