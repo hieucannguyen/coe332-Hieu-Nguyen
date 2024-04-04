@@ -14,7 +14,7 @@ Homework07/
     ├── requirements.txt
     ├── README.md
     ├── data
-│   │   └── .gitcanary
+    │   └── .gitcanary
     └── src
       ├── gene_api.py
       ├── jobs.py
