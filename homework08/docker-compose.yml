@@ -17,7 +17,8 @@ services:
         depends_on:
             - redis-db
         environment:
-        - REDIS_HOST=redis-db
+          - REDIS_HOST=redis-db
+          - LOG_LEVEL=WARNING
         image: hieucannguyen/hgnc_app:1.0
         ports:
             - 5000:5000
@@ -31,5 +32,6 @@ services:
         - redis-db
       environment:
         - REDIS_HOST=redis-db
+        - LOG_LEVEL=WARNING
       command: ["python3", "-u", "worker.py"]
                   
