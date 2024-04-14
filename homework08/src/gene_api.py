@@ -23,9 +23,9 @@ def submit_jobs():
     """
     data = request.get_json()
     try:
-        job_dict = add_job(data['symbol'], data['gene_family'])
+        job_dict = add_job(data['gene_group'])
     except KeyError:
-        return jsonify({'message':'invalid parameters, must pass a symbol and a gene_family'})
+        return jsonify({'message':'invalid parameters, must pass a gene_group'})
     return job_dict
 
 @app.route('/jobs', methods=['GET'])

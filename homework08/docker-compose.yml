@@ -31,5 +31,5 @@ services:
         - redis-db
       environment:
         - REDIS_HOST=redis-db
-      command: ["python3", "worker.py"]
+      command: ["python3", "-u", "worker.py"]
                   
