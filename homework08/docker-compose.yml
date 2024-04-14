@@ -22,7 +22,6 @@ services:
         image: hieucannguyen/hgnc_app:1.0
         ports:
             - 5000:5000
-
         command: ["python3", "gene_api.py"]
     worker:
       build:

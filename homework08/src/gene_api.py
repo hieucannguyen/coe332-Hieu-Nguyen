@@ -30,7 +30,7 @@ def submit_jobs():
     """
     data = request.get_json()
     try:
-        logging.debug(f'symbol: {data['symbol']}, gene_group{data['gene_family']}')
+        #logging.debug(f'symbol: {data['symbol']}, gene_group{data['gene_family']}')
         job_dict = add_job(data['gene_group'])
     except KeyError:
         logging.error('invalid parameters, must pass a symbol and a gene_family')
@@ -42,7 +42,7 @@ def get_jobs():
     """
         Gets all jobs in the redis database
     """
-    logging.debug(f'Jobs database keys{jdb.keys()}')
+    #logging.debug(f'Jobs database keys{jdb.keys()}')
     return jsonify(jdb.keys())
 @app.route('/jobs/<jobid>', methods=['GET'])
 def get_job(jobid):
