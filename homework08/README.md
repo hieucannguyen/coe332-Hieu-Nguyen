@@ -1,5 +1,5 @@
 # Gene API Job Requests
-This project utilizes the gene symbol reports managed by the HUGO Gene Nomenclature Committee (HGNC) to create API endpoints using flask. The API endpoints serve to perfrom Create, Read, and Delete operations on the HGNC gene dataset to a redis database. The endpoints also support GET routes for users to interact with the gene data from the redis database. Additionally, this project adds a jobs database feature so that user can send in jobs requests.
+This project utilizes the gene symbol reports managed by the HUGO Gene Nomenclature Committee (HGNC) to create API endpoints using flask. The API endpoints serve to perfrom Create, Read, and Delete operations on the HGNC gene dataset to a redis database. The endpoints also support GET routes for users to interact with the gene data from the redis database. Additionally, this project adds a jobs database feature so that user can send in jobs requests and then view results of the job request.
 
 Must have [Docker](https://docs.docker.com/get-docker/) installed on your system.
 
@@ -26,7 +26,7 @@ Homework07/
 - [requirements.txt](requirements.txt) Required dependencies for the project
 - [gene_api.py](gene_api.py) API endpoints for communicaton to redis and get requests
 - [jobs.py](jobs.py) Module to handle jobs requests 
-- [worker.py](worker.py) worker to handle jobs in the redis database (queue) as they come in
+- [worker.py](worker.py) worker to handle jobs in the redis database (queue) as they come in and then post results in the results database
 
 ## Running the application using Docker
 ### Build the image
@@ -60,10 +60,9 @@ $ docker-compose down
 Example output using `$ curl localhost:5000/jobs -X POST -d '{"symbol": "AA","gene_family":123}' -H "Content-Type: application/json"`:
 ~~~
 {
-  "gene_family": 123,
-  "id": "eaaba65c-56b5-40c6-81d0-5ed6197e21ec",
+  "gene_group": "Antisense RNAs",
+  "id": "a9935554-878e-437b-a3fe-25f15c0b1788",
   "status": "submitted",
-  "symbol": "AA"
 }
 ~~~
 Means the job has been added to the redis database successfully.
@@ -84,17 +83,51 @@ Example output using `$ curl localhost:5000/jobs`:
 ]
 ~~~
 Means the data has been added to the redis database successfully.
-### `/jobs/<jobid?`
+### `/jobs/<jobid>`
 - METHOD: GET
 - Gets the specific job specified by jobid
 
-Example output using `$ curl localhost:5000/jobs/eaaba65c-56b5-40c6-81d0-5ed6197e21ec`:
+Example output using `$ curl localhost:5000/jobs/a9935554-878e-437b-a3fe-25f15c0b1788`:
 ~~~
 {
-  "gene_family": 123,
-  "id": "eaaba65c-56b5-40c6-81d0-5ed6197e21ec",
-  "status": "complete",
-  "symbol": "AA"
+  "gene_group": "Antisense RNAs",
+  "id": "a9935554-878e-437b-a3fe-25f15c0b1788",
+  "status": "complete"
+}
+~~~
+*Status could also report in progess meaning the job hasn't finished yet.*
+### `/results/<jobid>`
+- METHOD: GET
+- Gets the specific job result specified by jobid
+
+Example output using `$ curl localhost:5000/results/a9935554-878e-437b-a3fe-25f15c0b1788`:
+~~~
+{
+  "1998": 2,
+  "2000": 6,
+  "2001": 12,
+  "2002": 3,
+  "2003": 13,
+  "2004": 26,
+  "2005": 30,
+  "2006": 14,
+  "2007": 12,
+  "2008": 11,
+  "2009": 14,
+  "2010": 10,
+  "2011": 364,
+  "2012": 206,
+  "2013": 147,
+  "2014": 197,
+  "2015": 33,
+  "2016": 32,
+  "2017": 87,
+  "2018": 56,
+  "2019": 148,
+  "2020": 152,
+  "2021": 220,
+  "2022": 98,
+  "2023": 46
 }
 ~~~
 Means the data has been added to the redis database successfully.

@@ -62,6 +62,8 @@ def get_result(jobid):
         Return results of a specific job
     """
     try:
+        if get_job_by_id(jobid)['status'] != 'complete':
+            return jsonify({'message': 'job is not finished yet, try again in a minute'})
         return json.loads(rdb.get(jobid))
     except:
         logging.error(f'job_id not found: {jobid}')
