@@ -12,6 +12,7 @@ Homework07/
     ├── Dockerfile
     ├── docker-compose.yml
     ├── requirements.txt
+    ├── hw8_software_diagram.svg
     ├── README.md
     ├── data
     │   └── .gitcanary
@@ -26,10 +27,17 @@ Homework07/
 - [Dockerfile](Dockerfile) Dockerfile to generate a docker image of our application
 - [docker-compose.yml](docker-compose.yml) docker-compose file to run the containerized Flask application
 - [requirements.txt](requirements.txt) Required dependencies for the project
+- [hw8_software_diagram.svg](hw8_software_diagram.svg) Software diagram
 - [gene_api.py](./src/gene_api.py) API endpoints for communicaton to redis and get requests
 - [jobs.py](./src/jobs.py) Module to handle jobs requests 
 - [worker.py](./src/worker.py) Worker to handle jobs in the redis database (queue) as they come in and then post results in the results database
 - [test_gene_api.py](./test/test_gene_api.py) Integration tests for flask app
+
+## Software Diagram
+![image](hw8_software_diagram.svg)
+
+*Software diagram of the Flask Application. Visualization of the containerized application using Docker and how the Flask app interacts with worker and Redis container.*
+
 ## Running the application using Docker
 ### Build the image
 Navigate into the directory where our app, Dockerfile, and [docker-compose.yml](docker-compose.yml) are located.
