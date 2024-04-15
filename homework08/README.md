@@ -130,7 +130,7 @@ Example output using `$ curl localhost:5000/results/a9935554-878e-437b-a3fe-25f1
   "2023": 46
 }
 ~~~
-Means the data has been added to the redis database successfully.
+This result is when a gene of a specified group was first approved and ordered by date.
 ### `/data`
 - METHOD: POST
 - Put the gene dataset into the redis database.
