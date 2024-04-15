@@ -33,7 +33,7 @@ def submit_jobs():
         #logging.debug(f'symbol: {data['symbol']}, gene_group{data['gene_family']}')
         job_dict = add_job(data['gene_group'])
     except KeyError:
-        logging.error('invalid parameters, must pass a symbol and a gene_family')
+        logging.error('invalid parameters, must pass a gene_group')
         return jsonify({'message':'invalid parameters, must pass a gene_group'})
     return job_dict
 
