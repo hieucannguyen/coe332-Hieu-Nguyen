@@ -15,7 +15,7 @@ Homework07/
     ├── README.md
     ├── data
     │   └── .gitcanary
-    ├── tests
+    ├── test
     │   └── test_gene_api.py
     └── src
       ├── gene_api.py
@@ -29,7 +29,7 @@ Homework07/
 - [gene_api.py](./src/gene_api.py) API endpoints for communicaton to redis and get requests
 - [jobs.py](./src/jobs.py) Module to handle jobs requests 
 - [worker.py](./src/worker.py) Worker to handle jobs in the redis database (queue) as they come in and then post results in the results database
-- [test_gene_api.py](./test/test_gene_api.py.py) Integration tests for flask app
+- [test_gene_api.py](./test/test_gene_api.py) Integration tests for flask app
 ## Running the application using Docker
 ### Build the image
 Navigate into the directory where our app, Dockerfile, and [docker-compose.yml](docker-compose.yml) are located.
