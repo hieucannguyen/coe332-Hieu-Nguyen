@@ -170,7 +170,7 @@ Example output using `$ curl localhost:5000/data`:
   ...
 ]
 ~~~
-Where each dictionary (looks like [/genes/<hgnc_id> GET route](#/genes/<hgnc_id>)) in the list is a gene with its associated data.
+Where each dictionary (looks like [/genes/<hgnc_id> GET route](#geneshgnc_id)) in the list is a gene with its associated data.
 ### `/data`
 - METHOD: DELETE
 - Delete everything in the redis database
@@ -271,7 +271,7 @@ Example output using `$ curl localhost:5000/genes/HGNC:20488`:
 ~~~
 
 ## Running integration tests
-Make sure the docker container is up and running and then navigate to the test folder
+Make sure the docker container is up and [running](#running-the-application-using-docker) and then navigate to the test folder
 ~~~
 $ cd test/
 ~~~
