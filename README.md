@@ -1,2 +1,4 @@
 # coe332-Hieu-Nguyen
-Repository for COE 332 projects
+Repository for Software Engineering and Design (COE 332) projects
+
+Each homework has a detailed README.md explaining the project and how-to-use instructions
